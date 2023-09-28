@@ -23,3 +23,4 @@
   3. Shift all the data into the provider
   4. Give the `ShowReviews.jsx` access to the context and display the reviews from there
   5. Allow `AddReview.jsx` access to the context`
+  6. Use `Link` to create  navigations
