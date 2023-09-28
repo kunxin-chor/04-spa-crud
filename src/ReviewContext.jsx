@@ -1,41 +1,55 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 // 1. create the review context
 // a context can store a value
 // in our case we only store an entire object as our value
 const ReviewContext = createContext();
 
+const BASE_API_URL = "https://kcx-rest-reviews-api.onrender.com/";
+
 // 2. create a ReviewProvider component
 const ReviewProvider = (props) => {
-  const [reviews, setReviews] = useState([
-    {
-      _id: "64931f23755a1426a2343234",
-      restaurant: "Tian Tian Chicken Rice2222",
-      review: "Nice rice and juicy meat",
-      rating: 5,
-    },
-    {
-      _id: "651264db7841ce1f3dedd662",
-      restaurant: "Taco Bell",
-      review: "Great tacos!",
-      rating: 3,
-    },
-    {
-      _id: "651264db7841ce1f3dedd663",
-      restaurant: "Arnold's Chicken",
-      review: "Great fried chicken!",
-      rating: 5,
-    },
-  ]);
+
+  const [reviews, setReviews] = useState([]);
+
+  // two arguments
+  // 1. the function to run when the effect activated (CANNOT BE ASYNC)
+  // 2. the second argument is known as the dependency
+  // -- when those values changed, the function in the first argument will run automatically
+  useEffect(()=>{
+
+    // define a function to fetch the data in an async manner
+    // (work around for the function in the effect not being async)
+    const fetchReviews = async () => {
+      const response = await fetch(BASE_API_URL + "reviews");
+      const data = await response.json();
+      setReviews(data);
+    }
+    // call that function
+    fetchReviews();
+
+  }, []); // leave the dependency as an empty array if we want the function to actiate
+          // after the component is rendered for the first time
 
   // assume the first argument will be the review object itself
   // - restaurant  
   // - review
   // - rating
   // - _id 
-  const addReview = (review) => {
-    // temporarily assign it a random number as ID
-    review._id = Math.floor(Math.random() * 1000000);
+  const addReview = async (review) => {
+
+    review.rating = parseInt(review.rating);
+
+    const response = await fetch(BASE_API_URL + 'reviews',{
+      method:"POST",
+      headers:{
+        'Content-Type':'application/json'
+      },
+      body: JSON.stringify(review)
+    });
+    const results = await response.json();
+    review._id = results.insertedId;
+
     const updatedReviews = [...reviews, review];
     setReviews(updatedReviews);
   }
@@ -49,13 +63,24 @@ const ReviewProvider = (props) => {
     return wantedReview;
   }
 
-  const updateReview = (id, restaurant, review, rating) => {
+  const updateReview = async (id, restaurant, review, rating) => {
     const modifiedReview = {
       _id : id,
       restaurant: restaurant,
       review: review,
-      rating: rating
+      rating: parseInt(rating)
     }
+
+    const response = await fetch(BASE_API_URL + "reviews/" + id,{
+      method:"PUT",
+      headers:{
+        'Content-Type':'application/json'
+      },
+      body: JSON.stringify(modifiedReview)
+    });
+
+    const results = await response.json();
+
     // goal: insert modified review back at its original index in the array
     // 1. find the index
     const indexToReplace = reviews.findIndex(r => r._id == id);
@@ -69,7 +94,15 @@ const ReviewProvider = (props) => {
     setReviews(updated);
   }
 
-  const deleteReview = (id) => {
+  const deleteReview = async (id) => {
+
+    const response = await fetch(BASE_API_URL + "reviews/" + id,{
+      method:"DELETE",
+      headers:{
+        'Content-Type':'application/json'
+      }
+    });
+
     // find the index
     const indexToDelete = reviews.findIndex(r => r._id == id);
     const modifiedReviews = [
