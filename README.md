@@ -18,3 +18,6 @@
   1. Create a `Review` component that will just display the review
 
   ## Branch 03: Adding a new review
+  1. Create the context
+  2. Create a provider
+  3. Shift all the data into the provider
