@@ -13,6 +13,9 @@ export default function Review(props) {
             <button className="btn btn-primary" onClick={()=>{
               navigate("/edit/" + props.review._id);
             }}>Edit</button>
+            <button className="btn btn-danger ms-3" onClick={()=>{
+              navigate("/delete/" + props.review._id);
+            }}>Delete</button>
           </div>
         </div>
       );

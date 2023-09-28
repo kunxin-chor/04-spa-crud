@@ -69,6 +69,18 @@ const ReviewProvider = (props) => {
     setReviews(updated);
   }
 
+  const deleteReview = (id) => {
+    // find the index
+    const indexToDelete = reviews.findIndex(r => r._id == id);
+    const modifiedReviews = [
+        ...reviews.slice(0, indexToDelete),
+        ...reviews.slice(indexToDelete+1)
+
+    ];
+    setReviews(modifiedReviews);
+  
+  }
+
   // create the context provider and return it
   return (
     // Set whatever the ReviewContext is storing to
@@ -80,7 +92,8 @@ const ReviewProvider = (props) => {
         "reviews": reviews,
         "addReview": addReview,
         "findReviewById": findReviewById,
-        "updateReview": updateReview
+        "updateReview": updateReview,
+        "deleteReview": deleteReview
       }}
     >
         {props.children}

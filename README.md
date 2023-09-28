@@ -25,9 +25,14 @@
   5. Allow `AddReview.jsx` access to the context`
   6. Use `Link` to create  navigations
 
-  ## Branch 04:
+  ## Branch 04: Update Review
   1. Make the context available in `EditReview`
   2. Allow the `EditReview` to find the review that we are editing
   3. Make a reusable ReviewForm component (modular enough for adding a new review, and editing an existing review)
   4. Establish parent/child communication between the ReviewForm and its parent
   5. Allow the EditReview to modify the review
+
+  ## Branch 05: Delete Review
+  1. Add a button to the Review component that the user can click
+  2. Then we have a confirmation page (ConfirmDelete.jsx) to confirm that the user want to delete. Need to make sure ConfirmDelete can access the context
+  3. If the user confirm then we to do delete --> add a new deleteReview function to our context

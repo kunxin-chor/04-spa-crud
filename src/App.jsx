@@ -5,6 +5,7 @@ import { ReviewProvider } from "./ReviewContext";
 import ShowReviews from "./pages/ShowReviews";
 import EditReview from "./pages/EditReview";
 import AddReview from "./pages/AddReview";
+import ConfirmDelete from "./pages/ConfirmDelete";
 
 // import bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -35,6 +36,7 @@ function App() {
               <Route path="/" element={<ShowReviews />} />
               <Route path="/add" element={<AddReview />} />
               <Route path="/edit/:index" element={<EditReview />} />
+              <Route path="/delete/:id" element={<ConfirmDelete/>} />
             </Routes>
           </BrowserRouter>
         </ReviewProvider>
