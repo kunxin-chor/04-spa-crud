@@ -28,6 +28,18 @@ const ReviewProvider = (props) => {
     },
   ]);
 
+  // assume the first argument will be the review object itself
+  // - restaurant  
+  // - review
+  // - rating
+  // - _id 
+  const addReview = (review) => {
+    // temporarily assign it a random number as ID
+    review._id = Math.floor(Math.random() * 1000000);
+    const updatedReviews = [...reviews, review];
+    setReviews(updatedReviews);
+  }
+
   // create the context provider and return it
   return (
     // Set whatever the ReviewContext is storing to
@@ -37,9 +49,10 @@ const ReviewProvider = (props) => {
     <ReviewContext.Provider
       value={{
         "reviews": reviews,
+        "addReview": addReview
       }}
     >
-      {props.children}
+        {props.children}
     </ReviewContext.Provider>
   );
 };

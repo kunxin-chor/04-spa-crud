@@ -21,3 +21,5 @@
   1. Create the context
   2. Create a provider
   3. Shift all the data into the provider
+  4. Give the `ShowReviews.jsx` access to the context and display the reviews from there
+  5. Allow `AddReview.jsx` access to the context`
