@@ -12,3 +12,4 @@
   2. Do list rendering
     - we can use a function that returns an array of jsx elements
     - we can use .map directly in the jsx
+  3. Optional: install bootstrap with `npm install bootstrap`

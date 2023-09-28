@@ -6,10 +6,15 @@ import ShowReviews from './pages/ShowReviews';
 import EditReview from './pages/EditReview';
 import AddReview from './pages/AddReview';
 
+// import bootstrap
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 function App() {
 
   return (
     <>
+ 
+    <div className="container">
     <h1>RecipeBook App</h1>
     {/* All the routes must be defined as children of the BrowserRouter */}
      <BrowserRouter>
@@ -24,6 +29,7 @@ function App() {
         }/>
       </Routes>
      </BrowserRouter>
+     </div>
     </>
   )
 }
