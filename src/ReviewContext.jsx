@@ -30,6 +30,10 @@ const ReviewProvider = (props) => {
 
   // create the context provider and return it
   return (
+    // Set whatever the ReviewContext is storing to
+    // be the object in the value
+    // ReviewContext is like the private members of a class
+    // Provider is both the getter/setter
     <ReviewContext.Provider
       value={{
         "reviews": reviews,
