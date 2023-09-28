@@ -13,3 +13,8 @@
     - we can use a function that returns an array of jsx elements
     - we can use .map directly in the jsx
   3. Optional: install bootstrap with `npm install bootstrap`
+
+  ## Branch 02: Creating a Review component
+  1. Create a `Review` component that will just display the review
+
+  ## Branch 03: Adding a new review

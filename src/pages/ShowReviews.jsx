@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Review from "../components/Review";
 
 export default function ShowReviews() {
   const [reviews, setReviews] = useState([
@@ -59,13 +60,7 @@ export default function ShowReviews() {
         // each element of the new array is transformed an element in an array
         reviews.map((r, index) => {
           return (
-            <div className="card mt-3" key={r._id}>
-              <div className="card-body">
-                <h3 className="card-title">{r.restaurant}</h3>
-                <p className="card-text">{r.review}</p>
-                <p className="card-text">Rating: {r.rating}/5</p>
-              </div>
-            </div>
+            <Review key={r._id} review={r}/>
           );
         })
       }
