@@ -40,6 +40,35 @@ const ReviewProvider = (props) => {
     setReviews(updatedReviews);
   }
 
+  const findReviewById = (id) => {
+    // findIndex takes in one argument which is a function
+    // each element of the array is passed into it
+    // the first instance when the function return true
+    // means we want the index for that current execution
+    const wantedReview = reviews.find(r=> r._id == id);
+    return wantedReview;
+  }
+
+  const updateReview = (id, restaurant, review, rating) => {
+    const modifiedReview = {
+      _id : id,
+      restaurant: restaurant,
+      review: review,
+      rating: rating
+    }
+    // goal: insert modified review back at its original index in the array
+    // 1. find the index
+    const indexToReplace = reviews.findIndex(r => r._id == id);
+
+    // 2. create the replacement array
+    const updated = [ ...reviews.slice(0, indexToReplace),
+                      modifiedReview,
+                      ...reviews.slice(indexToReplace+1)
+    
+    ];
+    setReviews(updated);
+  }
+
   // create the context provider and return it
   return (
     // Set whatever the ReviewContext is storing to
@@ -49,7 +78,9 @@ const ReviewProvider = (props) => {
     <ReviewContext.Provider
       value={{
         "reviews": reviews,
-        "addReview": addReview
+        "addReview": addReview,
+        "findReviewById": findReviewById,
+        "updateReview": updateReview
       }}
     >
         {props.children}
